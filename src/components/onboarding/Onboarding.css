@@ -1,0 +1,16 @@
+.questionaire {
+    display: flex;
+    flex-direction: column;
+}
+
+.checkbox-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.checkbox-container div {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
