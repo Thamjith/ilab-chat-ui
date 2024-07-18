@@ -14,7 +14,7 @@ const ChatContainer = ({ responses, message, setMessage, handleSendMessage, hand
 // console.log("initialQuestion = ", initialQuestion)
   return (
     <div className="chat-container" style={{
-      backgroundImage: `url(${process.env.PUBLIC_URL}/chatbot.png)`,
+      backgroundImage: `url(${process.env.PUBLIC_URL}/instanaLogo3.png)`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       padding: '20px'

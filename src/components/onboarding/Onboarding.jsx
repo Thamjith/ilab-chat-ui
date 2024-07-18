@@ -3,9 +3,11 @@ import "./Onboarding.css"
 import React, { useEffect, useState } from 'react'
 
 const createSelectedOptionsString = (selectedOptions) => {
-    return Object.keys(selectedOptions)
-      .filter(key => selectedOptions[key])
-      .join(', ');
+    const selectedOptionMessage = Object.keys(selectedOptions)
+    .filter(key => selectedOptions[key])
+    .join(', ').replace(/_/g, ' ');
+    const modifiedQuestion = "What is instana? What are the steps for " + selectedOptionMessage + "?";
+    return modifiedQuestion;
   };
 
 const Onboarding = ({setMessage}) => {
