@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react';
 import './App.css';
-import axios from 'axios';
-import config from './components/utilities/config';
-import Header from './components/common/Header';
+
+import React, { useEffect, useState } from 'react';
+import { fetchChatSessions, fetchFolders, startNewSession } from './components/chat/ChatActions';
+
+import ChatContainer from './components/chat/ChatContainer';
 import ChatHistory from './components/chatHistory/ChatHistory';
 import ErrorPage from './components/common/ErrorPage';
-import ChatContainer from './components/chat/ChatContainer';
-import { fetchChatSessions, fetchFolders, startNewSession } from './components/chat/ChatActions';
+import Header from './components/common/Header';
+import Onboarding from './components/onboarding/Onboarding';
+import axios from 'axios';
 import { checkServerHealth } from './components/utilities/HealthCheck';
+import config from './components/utilities/config';
 
 function App() {
   const [sessionId, setSessionId] = useState(null);
@@ -20,6 +23,7 @@ function App() {
   const [selectedSessions, setSelectedSessions] = useState(new Set());
   const [folders, setFolders] = useState([]); // Add folders state
   const [isSending, setIsSending] = useState(false);
+  const [initialQuestion, setInitialQuestion] = useState(true);
 
   useEffect(() => {
     const initApp = async () => {
@@ -121,6 +125,7 @@ function App() {
 
   const handleSendMessage = async (message) => {
     if (!message.trim() || isSending) return;
+    setInitialQuestion(false)
     const newMessage = message.trim();
     const temporaryResponse = { role: 'assistant', content: 'The assistant is at work...' };
 
@@ -144,7 +149,7 @@ function App() {
   if (error) {
     return <ErrorPage error={error} />;
   }
-
+  console.log(message)
   return (
     <div className="App">
       <Header />
@@ -170,6 +175,7 @@ function App() {
           handleSendMessage={handleSendMessage}
           handleKeyDown={handleKeyDown}
           isSending={isSending}
+          InitialQuestion={initialQuestion}
         />
       </div>
     </div>
